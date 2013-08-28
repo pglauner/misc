@@ -9,8 +9,8 @@ def a_star(graph, start, end):
     """
     No heuristic function, simple shortest path algorithm.
     """
-    visited   = []
-    frontier  = []
+    visited   = set()
+    frontier  = set()
     path      = []
     came_from = {}
     # Cost from start along best known path
@@ -27,20 +27,20 @@ def a_star(graph, start, end):
         path.reverse()
         return path
 
-    frontier.append(start)
+    frontier.add(start)
     best_score[start] = 0
     while frontier:
         current  = min(frontier, key=lambda x: best_score[x])
         if current == end:
             return best_score[current], get_path(current)
         frontier.remove(current)
-        visited.append(current)
+        visited.add(current)
         for neighbor in graph[current]:
             tentative_score = best_score[current] + graph[current][neighbor]
             if neighbor not in visited:
                 if neighbor not in frontier or tentative_score < best_score[neighbor]:
                     came_from[neighbor] = current
                     best_score[neighbor] = tentative_score
-                    frontier.append(neighbor)
+                    frontier.add(neighbor)
 
     return -1, path
