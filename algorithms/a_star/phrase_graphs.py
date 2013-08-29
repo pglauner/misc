@@ -21,5 +21,6 @@ simple_phrase['test'] = {1: 0}
 
 if __name__ == '__main__':
     import queue_based
+    from utils import get_phrase
     dist, path = queue_based.a_star(simple_phrase, 0, 1)
-    print dist, '"%s"' % ' '.join(path[1:-1])
+    print dist, get_phrase(path)

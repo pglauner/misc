@@ -17,6 +17,10 @@ def get_unidirectional(graph):
     return res
 
 
+def get_phrase(path):
+    return ' '.join(path[1:-1])
+
+
 def get_edge_count(graph):
     count = 0
     for values in graph.values():
