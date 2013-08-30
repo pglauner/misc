@@ -60,12 +60,5 @@ class AStarSimplePhraseTests(unittest.TestCase):
             self.assertEqual((dist, get_phrase(phrase)), (0.7, 'This was a great test'))
 
 
-
-TEST_CLASSES = [AStarSimpleGraphTests,
-                AStarNorvigGraphTests,
-                AStarSimplePhraseTests,
-                ]
-
-
 if __name__ == '__main__':
     nose.main()
