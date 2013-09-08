@@ -16,5 +16,6 @@ def generate(k, N, TEMP):
     LEVEL = LEVEL - 1
     TEMP[k] = 0
 
-generate(0, 3, 3*[0])
-print RESULTS
+if __name__ == '__main__':
+    generate(0, 3, 3*[0])
+    print RESULTS

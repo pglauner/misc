@@ -16,6 +16,7 @@ def slow_inverse(f, delta=1/128.):
         return x if (f(x)-y < y-f(x-delta)) else x-delta
     return f_1 
 
+
 def inverse(f, delta = 1/128.):
     """Given a function y = f(x) that is a monotonically increasing function on
     non-negative numbers, return the function x = f_1(y) that is an approximate
@@ -34,6 +35,7 @@ def inverse(f, delta = 1/128.):
         return mid if (f(mid)-y < y-f(mid-delta)) else mid-delta
     return f_1
 
+
 def inverse_newton(f, delta = 1/128.):
     """Given a function y = f(x) that is a monotonically increasing function on
     non-negative numbers, return the function x = f_1(y) that is an approximate
@@ -49,16 +51,18 @@ def inverse_newton(f, delta = 1/128.):
         return x
     return newton
 
-def square(x): return x*x
-sqrt, sqrt1, sqrt2 = slow_inverse(square), inverse(square), inverse_newton(square)
-def special(x): return x - 2*x + 0.012345*x*x*x
-s, s1, s2 = slow_inverse(special), inverse(special), inverse_newton(special)
-N = 1000000000
 
-print sqrt(N)
-print sqrt1(N)
-print sqrt2(N)
+if __name__ == '__main__':
+    def square(x): return x*x
+    sqrt, sqrt1, sqrt2 = slow_inverse(square), inverse(square), inverse_newton(square)
+    def special(x): return x - 2*x + 0.012345*x*x*x
+    s, s1, s2 = slow_inverse(special), inverse(special), inverse_newton(special)
+    N = 1000000000
 
-print s(N)
-print s1(N)
-print s2(N)
+    print sqrt(N)
+    print sqrt1(N)
+    print sqrt2(N)
+
+    print s(N)
+    print s1(N)
+    print s2(N)

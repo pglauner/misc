@@ -75,6 +75,7 @@ field = field_most_difficult_norvig2
 
 MAX = 9
 
+
 def print_field():
     print repr(field).replace('], ', '\n').translate(None, '][,')
 
@@ -99,11 +100,13 @@ def solve(row, col):
             return True
     return False
 
+
 def next_cell(row, col):
     if col == 8:
         return solve(row + 1, 0)
     else:
         return solve(row, col + 1)
+
 
 def check(row, col, val):
     def get_subfield(x1, x2, y1, y2):
@@ -126,9 +129,10 @@ def check(row, col, val):
             and does_not_contain(col_values) \
             and does_not_contain(square_values)
 
-print_field()
-start = time.clock()
-print solve_sudoku()
-t = time.clock() - start
-print_field()
-print '(%.2f seconds)\n' % t
+if __name__ == '__main__':
+    print_field()
+    start = time.clock()
+    print solve_sudoku()
+    t = time.clock() - start
+    print_field()
+    print '(%.2f seconds)\n' % t
