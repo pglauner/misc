@@ -4,7 +4,7 @@ Created on Aunorvig_graph 28, 2013
 @author: pnorvig_graphlauner
 '''
 
-# See Artificial Intellinorvig_graphence A Modern Approach, Third Edition Finorvig_graphure 3.2
+# See Artificial Intelligence A Modern Approach, Third Edition Finorvig_graphure 3.2
 
 norvig_graph = {}
 norvig_graph['A'] = {'S': 140, 'T': 118, 'Z': 75}
