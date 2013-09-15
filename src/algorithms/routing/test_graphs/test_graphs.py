@@ -30,3 +30,10 @@ simple_graph[0] = {1: 1.5, 2: 1, 3: 1.2}
 simple_graph[2] = {4: 2}
 simple_graph[3] = {4: 2}
 simple_graph[1] = {4: 1.5}
+
+tricky_graph = {}
+tricky_graph[0] = {1: 1, 2: 5}
+tricky_graph[1] = {3: 1}
+tricky_graph[2] = {100: 1}
+tricky_graph[3] = {4: 1}
+tricky_graph[4] = {100: 10}

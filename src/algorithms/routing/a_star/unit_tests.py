@@ -8,8 +8,8 @@ import unittest
 import nose
 import copy
 
-from algorithms.routing.test_graphs import simple_graph, norvig_graph
-from algorithms.routing.phrase_graphs import simple_phrase
+from algorithms.routing.test_graphs.test_graphs import simple_graph, norvig_graph
+from algorithms.routing.test_graphs.phrase_graphs import simple_phrase
 from utils import get_unidirectional, get_phrase
 import simple
 import queue_based

@@ -6,12 +6,12 @@ Created on Aug 30, 2013
 
 import cProfile
 import simple, queue_based
-import algorithms.routing.test_graphs
-import algorithms.routing.phrase_graphs
+import algorithms.routing.test_graphs.test_graphs
+import algorithms.routing.test_graphs.phrase_graphs
 
 
 def find_route(impl):
-    return impl.a_star(algorithms.routing.phrase_graphs.simple_phrase, 0, 1)
+    return impl.a_star(algorithms.routing.test_graphs.phrase_graphs.simple_phrase, 0, 1)
 
 
 if __name__ == '__main__':

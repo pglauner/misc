@@ -17,10 +17,3 @@ simple_phrase['a'] = {'great': 0.1, 'greet': 0.3}
 simple_phrase['great'] = {'test': 0.3}
 simple_phrase['greet'] = {'test': 0.2}
 simple_phrase['test'] = {1: 0}
-
-
-if __name__ == '__main__':
-    import queue_based
-    from utils import get_phrase
-    dist, path = queue_based.a_star(simple_phrase, 0, 1)
-    print dist, get_phrase(path)

@@ -23,3 +23,5 @@ def shortest_path_search(start, successors, is_goal):
                 else:
                     frontier.append(path2)
     return Fail
+
+Fail = []
