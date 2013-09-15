@@ -10,7 +10,7 @@ import copy
 
 from algorithms.routing.test_graphs.test_graphs import simple_graph, norvig_graph
 from algorithms.routing.test_graphs.phrase_graphs import simple_phrase
-from utils import get_unidirectional, get_phrase
+from algorithms.routing.test_graphs.graph_utils import get_unidirectional
 import simple
 import queue_based
 
@@ -57,7 +57,7 @@ class AStarSimplePhraseTests(unittest.TestCase):
         p = simple_phrase
         for impl in IMPLEMENTATIONS:
             dist, phrase = impl.a_star(p, 0, 1)
-            self.assertEqual((dist, get_phrase(phrase)), (0.7, 'This was a great test'))
+            self.assertEqual((dist, phrase), (0.7, [0, 'This', 'was', 'a', 'great', 'test', 1]))
 
 
 if __name__ == '__main__':
