@@ -67,11 +67,12 @@ def sense(p, m):
     return q
 
 
-for i in range(len(measurements)):
-    p = move(p, motions[i])
-    p = sense(p, measurements[i])
+if __name__ == '__main__':
+    for i in range(len(measurements)):
+        p = move(p, motions[i])
+        p = sense(p, measurements[i])
 
-#Your probability array must be printed 
-#with the following code.
+    #Your probability array must be printed 
+    #with the following code.
 
-show(p)
+    show(p)
