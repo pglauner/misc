@@ -39,10 +39,10 @@ def move(p, m):
     m_y, m_x = m
     q_temp = []
     q = [[0]*N_x for _ in range(N_y)]
-    if m_y == 1:
-        q_temp = [p[(y - 1)] for y in range(N_y)]
-    elif m_x == 1:
-        q_temp = [row[-1:] + row[0:-1] for row in p]
+    if abs(m_y) == 1:
+        q_temp = [p[(y - m_y)] for y in range(N_y)]
+    elif abs(m_x) == 1:
+        q_temp = [row[-m_x:] + row[:-m_x] for row in p]
     else:
         return p
     #Considers probabilistic moving
