@@ -126,23 +126,47 @@ for i in range(N):
 # resampled according to their weights.
 # Also, DO NOT MODIFY p.
 
-def get_weighted_choice(weights):
+def resample1(weights):
+    """
+    Binary searcher.
+    """
     totals = []
     running_total = 0
     for weight in weights:
         running_total += weight
         totals.append(running_total)
-    def f():
+    def f(_):
+        """
+        Param only for parameter-compatibility to resample2.
+        """
         rnd = random.random() * running_total
         return bisect.bisect(totals, rnd)
 
     return f
 
+
+def resample2(weights):
+    """
+    Resampling wheel.
+    """
+    index = int(random.random() * (N - 1))
+    beta = 0
+    max_weight = max(w)
+
+    for i in range(N):
+        beta += random.random() * 2.0 * max_weight
+        while w[index] < beta:
+            beta -= w[index]
+            index = (index + 1) % N
+        return index
+
+
 if __name__ == '__main__':
     p3 = []
-    sampler = get_weighted_choice(w)
+    #sampler = resample1(w)
+    sampler = resample2
     for i in range(N):
-        j = sampler()
+        j = sampler(w)
         p3.append(p2[j])
 
     print p3
