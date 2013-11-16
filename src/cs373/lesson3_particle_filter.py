@@ -5,7 +5,6 @@ Created on Nov 16, 2013
 '''
 from math import *
 import random
-import bisect
 
 landmarks  = [[20.0, 20.0], [80.0, 80.0], [20.0, 80.0], [80.0, 20.0]]
 world_size = 100.0
@@ -120,84 +119,44 @@ def move():
 
 w = []
 def measure_weights():
+    global w
     Z = myrobot.sense()
+    w = []
     for i in range(N):
         w.append(p[i].measurement_prob(Z))
 
-def resample():
-    global p
-    p3 = []
-    index = int(random.random() * N)
-    beta = 0.0
-    mw = max(w)
-    for i in range(N):
-        beta += random.random() * 2.0 * mw
-        while beta > w[index]:
-            beta -= w[index]
-            index = (index + 1) % N
-        p3.append(p[index])
-    p = p3
 
-
-
-#### DON'T MODIFY ANYTHING ABOVE HERE! ENTER CODE BELOW ####
-# You should make sure that p3 contains a list with particles
-# resampled according to their weights.
-# Also, DO NOT MODIFY p.
-
-def resample1(weights):
-    """
-    Binary searcher.
-    """
-    totals = []
-    running_total = 0
-    for weight in weights:
-        running_total += weight
-        totals.append(running_total)
-    def f(_):
-        """
-        Param only for parameter-compatibility to resample2.
-        """
-        rnd = random.random() * running_total
-        return bisect.bisect(totals, rnd)
-
-    return f
-
-
-def resample2(weights):
+def resample(weights):
     """
     Resampling wheel.
     """
-    index = int(random.random() * (N - 1))
+    global p
+    index = int(random.random() * N)
     beta = 0
     max_weight = max(w)
+    p3 = []
 
     for i in range(N):
         beta += random.random() * 2.0 * max_weight
         while w[index] < beta:
             beta -= w[index]
             index = (index + 1) % N
-        return index
+        p3.append(p[index])
+    p = p3
 
 
 def run_particle_filter():
     global p
     move()
     measure_weights()
-    resample()
-    p3 = []
-    #sampler = resample1(w)
-    sampler = resample2
-    for i in range(N):
-        j = sampler(w)
-        p3.append(p[j])
-    p = p3
+    resample(w)
 
 
 if __name__ == '__main__':
     # The more often the robot moves and executed the particle filter, the better.
     # Running it 10 instead of 2 times specifically improves the direction prediction
-    for i in range(10):
+    print eval(myrobot, p)
+    for i in range(T):
         myrobot = myrobot.move(0.1, 5.0)
         run_particle_filter()
-    print p
+        print eval(myrobot, p)
