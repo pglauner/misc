@@ -32,7 +32,7 @@ def smooth(path, weight_data = 0.5, weight_smooth = 0.1, tolerance=0.0000001):
 
     return newpath
 
-newpath = smooth(path)
-
-for i in range(len(path)):
-    print '['+ ', '.join('%.3f'%x for x in path[i]) +'] -> ['+ ', '.join('%.3f'%x for x in newpath[i]) +']'
+if __name__ == '__main__':
+    newpath = smooth(path)
+    for i in range(len(path)):
+        print '['+ ', '.join('%.3f'%x for x in path[i]) +'] -> ['+ ', '.join('%.3f'%x for x in newpath[i]) +']'
