@@ -47,7 +47,11 @@ a2 = [ones(size(a2, 1),1) a2];
 z3 = a2 * Theta2';
 a3 = sigmoid(z3);
 
-J = (1/m) * sum(sum(-y .* log(a3) - (1-y) .* log(1-a3)));
+% Computes regularization part
+reg = lambda / (2*m) * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
+
+
+J = (1/m) * sum(sum(-y .* log(a3) - (1-y) .* log(1-a3))) + reg;
 
 
 % ====================== YOUR CODE HERE ======================
