@@ -30,6 +30,26 @@ J = 0;
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
 
+
+% Adds bias values
+X = [ones(m,1) X];
+
+% Converts y to binary representation
+y = eye(num_labels)(y,:);
+
+% Computes level 2 values
+a1 = X;
+z2 = a1 * Theta1';
+a2 = sigmoid(z2);
+
+% Computes level 3 values
+a2 = [ones(size(a2, 1),1) a2];
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
+
+J = (1/m) * sum(sum(-y .* log(a3) - (1-y) .* log(1-a3)));
+
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
 %               following parts.
