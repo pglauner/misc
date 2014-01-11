@@ -54,16 +54,24 @@ reg = lambda / (2*m) * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^
 J = (1/m) * sum(sum(-y .* log(a3) - (1-y) .* log(1-a3))) + reg;
 
 
+% Computes error terms
 delta3 = a3 - y;
+% Removes bias terms
 delta2 = (delta3 * Theta2(:,2:end)) .* sigmoidGradient(z2);
 
+% Accumulates gradient
 Delta2 = delta3' * a2;
 Delta1 = delta2' * a1;
 
-Theta1_grad = ((1/m) * Delta1);
-Theta2_grad = ((1/m) * Delta2);
+% Computes gradient
+Theta1_grad = (1/m) * Delta1;
+Theta2_grad = (1/m) * Delta2;
 
-
+% Computes regularized gradient
+Theta1_grad += (lambda/m) * Theta1;
+Theta2_grad += (lambda/m) * Theta2;
+Theta1_grad(:,1) -= (lambda/m) * Theta1(:,1);
+Theta2_grad(:,1) -= (lambda/m) * Theta2(:,1);
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
