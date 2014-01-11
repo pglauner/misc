@@ -1,2 +1,3 @@
 *.pyc
 ml_login_data.mat
+.DS_Store
