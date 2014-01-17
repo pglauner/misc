@@ -23,7 +23,26 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+C = 1;
+sigma = 0.1;
 
+%vals = [0.01 0.03 0.1 0.3 1 3 10 30];
+%maxError = Inf;
+
+%for currC = vals
+%  for currSigma = vals
+%    model = svmTrain(X, y, currC, @(x1, x2) gaussianKernel(x1, x2, currSigma));
+
+%    predictions = svmPredict(model, Xval);
+%    predictionError = mean(double(predictions ~= yval));
+
+%    if predictionError < maxError
+%      maxError = predictionError;
+%      C = currC;
+%      sigma = currSigma;
+%    end
+%  end
+%end
 
 
 
