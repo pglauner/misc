@@ -5,6 +5,7 @@ function idx = findClosestCentroids(X, centroids)
 %   vector of centroid assignments (i.e. each entry in range [1..K])
 %
 
+m = size(X, 1);
 % Set K
 K = size(centroids, 1);
 
@@ -21,9 +22,16 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
+for i = 1:m
+    best = Inf;
+    for k = 1:K
+        curr_distance = norm(X(i,:) - centroids(k,:))^2;
+        if curr_distance < best
+            best = curr_distance;
+            idx(i) = k;
+        endif
+    endfor
+endfor
 
 
 
