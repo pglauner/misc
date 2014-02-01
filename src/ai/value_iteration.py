@@ -11,7 +11,7 @@ Amended world from Artificial Intelligence: A Modern Approach, Chapter 17:
 -------------
 |  |  |  |+1|
 |  |--|-1|-1|
-|+1|  |  |  |
+|  |  |  |  |
 -------------
 
 State IDs:
