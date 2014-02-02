@@ -135,7 +135,8 @@ def get_optimal_policy(v_star):
         pi[s] = values.index(max(values))
     return pi
 
-v_star = value_iteration()
-policy = get_optimal_policy(v_star)
-print_world(v_star)
-print_world(policy, True)
+if __name__ == '__main__':
+    v_star = value_iteration()
+    policy = get_optimal_policy(v_star)
+    print_world(v_star)
+    print_world(policy, True)
