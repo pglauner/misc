@@ -33,7 +33,8 @@ def shortest_path_search_new(start, successors, is_goal):
     such that is_goal(state) is true."""
     if is_goal(start):
         return [start]
-    explored = set([start]) # set of states we have visited
+    # set of states we have visited, start visited initially
+    explored = set([start])
     frontier = [ [start] ] # ordered list of paths we have blazed
     while frontier:
         path = frontier.pop(0)
