@@ -65,20 +65,24 @@ def decision_tree_learning(examples, attributes, parent_examples):
         return tree
 
 
+def get_attribute_id(attribute):
+    return ATTRIBUTES[attribute]
+
+
 def choose_most_relevant_attribute(examples, attributes):
-    attribute = max([(attribute, importance(attribute, examples))
+    attribute = max([(attribute, importance(examples, attribute))
                                 for attribute in attributes], key=operator.itemgetter(1))[0]
 
     return attribute
 
 
 def get_attribute_values(examples, attribute):
-    attribute_id = ATTRIBUTES[attribute]
+    attribute_id = get_attribute_id(attribute)
     return [e[attribute_id] for e in examples]
 
 
 def get_similiar_examples(examples, attribute, attribute_value):
-    attribute_id = ATTRIBUTES[attribute]
+    attribute_id = get_attribute_id(attribute)
     return dict((k, v) for (k, v) in examples.iteritems() if k[attribute_id] == attribute_value)
 
 
@@ -86,16 +90,32 @@ def plurality_value(examples):
     return collections.Counter(examples.values()).most_common()[0]
 
 
-def importance(attribute, examples):
+def importance(examples, attribute):
     def log2(v):
         return math.log(v) / math.log(2)
 
     def b(q):
-        return -(q * log2(2) + (1 - q) * log2(1 - q))
+        # Shortcut to avoid treatment of log(0)
+        if q in (0, 1):
+            return 0
+        return -(q * log2(q) + (1 - q) * log2(1 - q))
 
-    # TODO
-    remainder = None
-    gain = None
+    def pos_neg(exs):
+        pos = float(sum([1 for (k, v) in exs.iteritems() if v == True]))
+        neg = float(sum([1 for (k, v) in exs.iteritems() if v == False]))
+        return pos, neg
+
+    def remainder_part(exs):
+        pos, neg = pos_neg(exs)
+        return (pos / (pos + neg)) * b(pos / (pos + neg))
+
+    attribute_id = get_attribute_id(attribute)
+    distinct_attribute_values = set([example[attribute_id] for example in examples.keys()])
+    distinct_examples = [get_similiar_examples(examples, attribute, attribute_value) for attribute_value in distinct_attribute_values]
+    remainder = sum([remainder_part(exs) for exs in distinct_examples])
+
+    pos, neg = pos_neg(examples)
+    gain = b(pos / (pos + neg)) - remainder
 
     return gain
 
