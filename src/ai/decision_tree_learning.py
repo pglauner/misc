@@ -2,12 +2,16 @@
 Created on Feb 16, 2014
 
 @author: pglauner
+
+Implementation of decision tree learning. Algorithm and examples based on
+Artificial Intelligence: A Modern Approach, Chapter 18.
+
 '''
 
 import collections
 
 
-EXAMPLE = {
+EXAMPLES = {
     # (Alt, Bar, Fri, Hun, Pat, Price, Rain, Res, Type, Est): WillWait
     (True,  False,  False,  True,   'Some', '$$$',  False,  True,   'French',   '0-10'):    True,
     (True,  False,  False,  True,   'Full', '$',    False,  False,  'Thai',     '30-60'):   False,
@@ -30,13 +34,22 @@ def Tree():
 
 def decision_tree_learning(examples, attributes, parent_examples):
     if len(examples) == 0:
-        pass
-    #elif:
-    #    pass
+        return plurality_value(parent_examples)
+    # All examples have the same classification
+    elif len(set(examples.values())) == 1:
+        return examples.values()[0]
     elif len(attributes) == 0:
-        pass
+        return plurality_value(examples)
     else:
         pass
+
+
+def plurality_value(examples):
+    return collections.Counter(examples.values()).most_common()[0]
+
+
+def importance(attribute, examples):
+    pass
 
 
 if __name__ == '__main__':
