@@ -101,20 +101,21 @@ def importance(examples, attribute):
         return -(q * log2(q) + (1 - q) * log2(1 - q))
 
     def pos_neg(exs):
-        pos = float(sum([1 for v in exs.values() if v == True]))
-        neg = float(sum([1 for v in exs.values() if v == False]))
+        pos = float(exs.values().count(True))
+        neg = float(exs.values().count(False))
         return pos, neg
 
     def remainder_part(exs):
-        pos, neg = pos_neg(exs)
-        return (pos / (pos + neg)) * b(pos / (pos + neg))
+        pos_k, neg_k = pos_neg(exs)
+        return ((pos_k + neg_k) / (pos + neg)) * b(pos_k / (pos_k + neg_k))
+
+    pos, neg = pos_neg(examples)
 
     attribute_id = get_attribute_id(attribute)
     distinct_attribute_values = set([example[attribute_id] for example in examples.keys()])
     distinct_examples = [get_similiar_examples(examples, attribute, attribute_value) for attribute_value in distinct_attribute_values]
     remainder = sum([remainder_part(exs) for exs in distinct_examples])
 
-    pos, neg = pos_neg(examples)
     gain = b(pos / (pos + neg)) - remainder
 
     return gain
