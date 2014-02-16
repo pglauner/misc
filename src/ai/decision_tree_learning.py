@@ -70,8 +70,8 @@ def get_attribute_id(attribute):
 
 
 def choose_most_relevant_attribute(examples, attributes):
-    attribute = max([(attribute, importance(examples, attribute))
-                                for attribute in attributes], key=operator.itemgetter(1))[0]
+    attribute = max([(attribute, importance(examples, attribute)) for attribute in attributes],
+                        key=operator.itemgetter(1))[0]
 
     return attribute
 
@@ -101,8 +101,8 @@ def importance(examples, attribute):
         return -(q * log2(q) + (1 - q) * log2(1 - q))
 
     def pos_neg(exs):
-        pos = float(sum([1 for (k, v) in exs.iteritems() if v == True]))
-        neg = float(sum([1 for (k, v) in exs.iteritems() if v == False]))
+        pos = float(sum([1 for v in exs.values() if v == True]))
+        neg = float(sum([1 for v in exs.values() if v == False]))
         return pos, neg
 
     def remainder_part(exs):
