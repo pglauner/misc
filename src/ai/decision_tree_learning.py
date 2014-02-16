@@ -10,6 +10,19 @@ Artificial Intelligence: A Modern Approach, Chapter 18.
 
 import collections
 
+ATTRIBUTES = {
+    'Alt': 0,
+    'Bar': 1,
+    'Fri': 2,
+    'Hun': 3,
+    'Pat': 4,
+    'Price': 5,
+    'Rain': 6,
+    'Res': 7,
+    'Type': 8,
+    'Est': 9,
+    }
+
 
 EXAMPLES = {
     # (Alt, Bar, Fri, Hun, Pat, Price, Rain, Res, Type, Est): WillWait
@@ -41,7 +54,14 @@ def decision_tree_learning(examples, attributes, parent_examples):
     elif len(attributes) == 0:
         return plurality_value(examples)
     else:
-        pass
+        attribute = None
+        tree = Tree()
+        for vk in attributes:
+            # TODO
+            exs = None
+            subtree = decision_tree_learning(exs, attributes - attribute, examples)
+            tree[attribute] = subtree
+        return tree
 
 
 def plurality_value(examples):
@@ -53,4 +73,5 @@ def importance(attribute, examples):
 
 
 if __name__ == '__main__':
-    t = Tree()
+    tree = decision_tree_learning(EXAMPLES, set(ATTRIBUTES.keys()), [])
+    print tree
