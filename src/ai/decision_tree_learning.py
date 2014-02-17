@@ -48,6 +48,7 @@ def Tree():
 
 
 def decision_tree_learning(examples, attributes, parent_examples):
+    attributes = set(attributes)
     if len(examples) == 0:
         return plurality_value(parent_examples)
     # All examples have the same classification
@@ -123,5 +124,5 @@ def importance(examples, attribute):
 
 
 if __name__ == '__main__':
-    tree = decision_tree_learning(EXAMPLES, set(ATTRIBUTES.keys()), [])
+    tree = decision_tree_learning(EXAMPLES, ATTRIBUTES.keys(), [])
     print tree
