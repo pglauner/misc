@@ -111,9 +111,7 @@ def importance(examples, attribute, attribute_id):
         return -(q * log2(q) + (1 - q) * log2(1 - q))
 
     def pos_neg(exs):
-        pos = float(exs.values().count(True))
-        neg = float(exs.values().count(False))
-        return pos, neg
+        return [float(exs.values().count(boolean)) for boolean in (True, False)]
 
     def remainder_part(exs):
         pos_k, neg_k = pos_neg(exs)
