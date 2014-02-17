@@ -78,7 +78,7 @@ def choose_most_relevant_attribute(examples, attributes):
 
 def get_attribute_values(examples, attribute):
     attribute_id = get_attribute_id(attribute)
-    return [e[attribute_id] for e in examples]
+    return set([e[attribute_id] for e in examples])
 
 
 def get_similiar_examples(examples, attribute, attribute_value):
