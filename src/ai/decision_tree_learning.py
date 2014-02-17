@@ -96,8 +96,9 @@ def importance(examples, attribute):
     def log2(v):
         return math.log(v) / math.log(2)
 
-    def b(q):
+    def b(p, n):
         # Shortcut to avoid treatment of log(0)
+        q = p / (p + n)
         if q in (0, 1):
             return 0
         return -(q * log2(q) + (1 - q) * log2(1 - q))
@@ -109,7 +110,7 @@ def importance(examples, attribute):
 
     def remainder_part(exs):
         pos_k, neg_k = pos_neg(exs)
-        return ((pos_k + neg_k) / (pos + neg)) * b(pos_k / (pos_k + neg_k))
+        return ((pos_k + neg_k) / (pos + neg)) * b(pos_k, neg_k)
 
     pos, neg = pos_neg(examples)
 
@@ -118,7 +119,7 @@ def importance(examples, attribute):
     distinct_examples = [get_similiar_examples(examples, attribute, attribute_value) for attribute_value in distinct_attribute_values]
     remainder = sum([remainder_part(exs) for exs in distinct_examples])
 
-    gain = b(pos / (pos + neg)) - remainder
+    gain = b(pos, neg) - remainder
 
     return gain
 
