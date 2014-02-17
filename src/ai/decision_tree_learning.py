@@ -87,6 +87,7 @@ def get_similiar_examples(examples, attribute, attribute_value):
 
 
 def plurality_value(examples):
+    # Deterministic tie breaker
     return collections.Counter(examples.values()).most_common()[0]
 
 
