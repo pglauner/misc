@@ -30,7 +30,7 @@ ATTRIBUTES = {
 
 
 EXAMPLES = {
-    # (Alt, Bar, Fri, Hun, Pat, Price, Rain, Res, Type, Est): WillWait
+    # (Alternate?, Bar?, Fri/Sat?, Hungry?, Patrons?, Price?, Raining?, Reservation?, Type?, WaitEstimate?): WillWait
     (True,  False,  False,  True,   'Some', '$$$',  False,  True,   'French',   '0-10'):    True,
     (True,  False,  False,  True,   'Full', '$',    False,  False,  'Thai',     '30-60'):   False,
     (False, True,   False,  False,  'Some', '$',    False,  False,  'Burger',   '0-10'):    True,
