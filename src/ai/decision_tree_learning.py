@@ -94,6 +94,11 @@ def plurality_value(examples):
     return collections.Counter(examples.values()).most_common()[0]
 
 
+def get_distinct_examples(examples, attribute_id):
+    return [get_similiar_examples(examples, attribute_id, attribute_value)
+                for attribute_value in get_attribute_values(examples, attribute_id)]
+
+
 def importance(examples, attribute, attribute_id):
     def log2(v):
         return math.log(v) / math.log(2)
@@ -116,9 +121,7 @@ def importance(examples, attribute, attribute_id):
 
     pos, neg = pos_neg(examples)
 
-    distinct_attribute_values = set([example[attribute_id] for example in examples.keys()])
-    distinct_examples = [get_similiar_examples(examples, attribute_id, attribute_value) for attribute_value in distinct_attribute_values]
-    remainder = sum([remainder_part(exs) for exs in distinct_examples])
+    remainder = sum([remainder_part(exs) for exs in get_distinct_examples(examples, attribute_id)])
 
     gain = b(pos, neg) - remainder
 
