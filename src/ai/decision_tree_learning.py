@@ -6,7 +6,11 @@ Created on Feb 16, 2014
 Implementation of decision tree learning. Algorithm and examples based on
 Artificial Intelligence: A Modern Approach, Chapter 18.
 
-Notes: code can be further improved to be completely independent from global
+This implementation generates a smaller tree than the one in figure 18.6. It has been
+tested on mutations of this sample set and worked as well. Code requires further
+careful analyses.
+
+Note: code can be further improved to be completely independent from global
 ATTRIBUTES variable.
 
 '''
