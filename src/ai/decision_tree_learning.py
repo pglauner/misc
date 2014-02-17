@@ -120,9 +120,7 @@ def importance(examples, attribute, attribute_id):
         return ((pos_k + neg_k) / (pos + neg)) * b(pos_k, neg_k)
 
     pos, neg = pos_neg(examples)
-
     remainder = sum([remainder_part(exs) for exs in get_distinct_examples(examples, attribute_id)])
-
     gain = b(pos, neg) - remainder
 
     return gain
