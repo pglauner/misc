@@ -6,6 +6,9 @@ Created on Feb 16, 2014
 Implementation of decision tree learning. Algorithm and examples based on
 Artificial Intelligence: A Modern Approach, Chapter 18.
 
+Notes: code can be further improved to be completely independent from global
+ATTRIBUTES variable.
+
 '''
 
 import collections
