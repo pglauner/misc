@@ -58,9 +58,10 @@ def decision_tree_learning(examples, attributes, parent_examples):
         return plurality_value(examples)
     else:
         attribute = choose_most_relevant_attribute(examples, attributes)
+        attribute_id = get_attribute_id(attribute)
         tree = Tree()
-        for attribute_value in get_attribute_values(examples, attribute):
-            exs = get_similiar_examples(examples, attribute, attribute_value)
+        for attribute_value in get_attribute_values(examples, attribute_id):
+            exs = get_similiar_examples(examples, attribute_id, attribute_value)
             subtree = decision_tree_learning(exs, attributes - set([attribute]), examples)
             tree[attribute][attribute_value] = subtree
         return tree
@@ -71,19 +72,17 @@ def get_attribute_id(attribute):
 
 
 def choose_most_relevant_attribute(examples, attributes):
-    attribute = max([(attribute, importance(examples, attribute)) for attribute in attributes],
+    attribute = max([(attribute, importance(examples, attribute, get_attribute_id(attribute))) for attribute in attributes],
                         key=operator.itemgetter(1))[0]
 
     return attribute
 
 
-def get_attribute_values(examples, attribute):
-    attribute_id = get_attribute_id(attribute)
+def get_attribute_values(examples, attribute_id):
     return set([e[attribute_id] for e in examples])
 
 
-def get_similiar_examples(examples, attribute, attribute_value):
-    attribute_id = get_attribute_id(attribute)
+def get_similiar_examples(examples, attribute_id, attribute_value):
     return dict((k, v) for (k, v) in examples.iteritems() if k[attribute_id] == attribute_value)
 
 
@@ -92,7 +91,7 @@ def plurality_value(examples):
     return collections.Counter(examples.values()).most_common()[0]
 
 
-def importance(examples, attribute):
+def importance(examples, attribute, attribute_id):
     def log2(v):
         return math.log(v) / math.log(2)
 
@@ -114,9 +113,8 @@ def importance(examples, attribute):
 
     pos, neg = pos_neg(examples)
 
-    attribute_id = get_attribute_id(attribute)
     distinct_attribute_values = set([example[attribute_id] for example in examples.keys()])
-    distinct_examples = [get_similiar_examples(examples, attribute, attribute_value) for attribute_value in distinct_attribute_values]
+    distinct_examples = [get_similiar_examples(examples, attribute_id, attribute_value) for attribute_value in distinct_attribute_values]
     remainder = sum([remainder_part(exs) for exs in distinct_examples])
 
     gain = b(pos, neg) - remainder
