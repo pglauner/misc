@@ -13,16 +13,16 @@ import operator
 import math
 
 ATTRIBUTES = {
-    'Alt': 0,
-    'Bar': 1,
-    'Fri': 2,
-    'Hun': 3,
-    'Pat': 4,
-    'Price': 5,
-    'Rain': 6,
-    'Res': 7,
-    'Type': 8,
-    'Est': 9,
+    'Alternate?': 0,
+    'Bar?': 1,
+    'Fri/Sat?': 2,
+    'Hungry?': 3,
+    'Patrons?': 4,
+    'Price?': 5,
+    'Raining?': 6,
+    'Reservation?': 7,
+    'Type?': 8,
+    'WaitEstimate?': 9,
 }
 
 
