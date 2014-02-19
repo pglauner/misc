@@ -6,9 +6,10 @@ Created on Feb 16, 2014
 Implementation of decision tree learning. Algorithm and examples based on
 Artificial Intelligence: A Modern Approach, Chapter 18.
 
-This implementation generates a smaller tree than the one in figure 18.6. It has been
+This implementation generates a different tree than the one in figure 18.6. It has been
 tested on mutations of this sample set and worked as well. Code requires further
-careful analyses.
+careful analyses. The difference is probably caused by different implementation of
+information gain deterministic tie breaker.
 
 Note: code can be further improved to be completely independent from global
 ATTRIBUTES variable.
@@ -38,7 +39,7 @@ EXAMPLES = {
     (True,  False,  False,  True,   'Some', '$$$',  False,  True,   'French',   '0-10'):    True,
     (True,  False,  False,  True,   'Full', '$',    False,  False,  'Thai',     '30-60'):   False,
     (False, True,   False,  False,  'Some', '$',    False,  False,  'Burger',   '0-10'):    True,
-    (True,  False,  True,   True,   'Full', '$',    True,   False,  'Thai',     '30-60'):   True,
+    (True,  False,  True,   True,   'Full', '$',    True,   False,  'Thai',     '10-30'):   True,
     (True,  False,  True,   False,  'Full', '$$$',  False,  True,   'French',   '>60'):     False,
     (False, True,   False,  True,   'Some', '$$',   True,   True,   'Italian',  '0-10'):    True,
     (False, True,   False,  False,  'None', '$',    True,   False,  'Burger',   '0-10'):    False,
