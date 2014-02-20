@@ -8,7 +8,7 @@ Artificial Intelligence: A Modern Approach, Chapter 18.
 
 This implementation generates a different tree than the one in figure 18.6. It has been
 tested on mutations of this sample set and worked as well. Code requires further
-careful analyses. The difference is probably caused by different implementation of
+careful analyzes. The difference is probably caused by different implementation of
 information gain deterministic tie breaker.
 
 Note: code can be further improved to be completely independent from global
