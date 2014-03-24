@@ -21,7 +21,7 @@ hypothesis = sigmoid(X * theta);
 theta2 = [0; theta(2:size(theta))];
 
 J = 1/m * (-y' * log(hypothesis) - (1 - y)' * log(1 - hypothesis));
-J += lambda / (2 * m) * sum(theta2.^2);
+J += lambda / (2 * m) * theta2' * theta2;
 
 grad = 1/m * X' * (hypothesis - y) + lambda / m * theta2;
 
