@@ -44,3 +44,9 @@ grandchild(X, Y) :- grandparent(Y, X).
 aunt(X, Y) :-
   parent(Z, Y),
   sister(X, Z).
+
+predecessor(X, Z) :- parent(X, Z).
+
+predecessor(X, Z) :-
+  parent(X, Y),
+  predecessor(Y, Z).
