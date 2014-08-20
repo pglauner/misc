@@ -101,8 +101,8 @@ while ~isempty(email_contents)
         if strcmp(str,vocabList{i})==1
             word_indices=[word_indices ; i];
             break;
-        endif
-    endfor
+        end
+    end
 
 
 
