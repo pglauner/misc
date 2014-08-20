@@ -67,7 +67,8 @@ Theta2_grad = zeros(size(Theta2));
 X = [ones(m,1) X];
 
 % Converts y to binary representation
-y = eye(num_labels)(y,:);
+y_bin = eye(num_labels);
+y_bin = y_bin(y,:);
 
 % Computes level 2 values
 a1 = X;
@@ -83,11 +84,11 @@ a3 = sigmoid(z3);
 reg = lambda / (2*m) * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
 
 
-J = (1/m) * sum(sum(-y .* log(a3) - (1-y) .* log(1-a3))) + reg;
+J = (1/m) * sum(sum(-y_bin .* log(a3) - (1-y_bin) .* log(1-a3))) + reg;
 
 
 % Computes error terms
-delta3 = a3 - y;
+delta3 = a3 - y_bin;
 % Removes bias terms
 delta2 = (delta3 * Theta2(:,2:end)) .* sigmoidGradient(z2);
 
@@ -100,10 +101,10 @@ Theta1_grad = (1/m) * Delta1;
 Theta2_grad = (1/m) * Delta2;
 
 % Computes regularized gradient
-Theta1_grad += (lambda/m) * Theta1;
-Theta2_grad += (lambda/m) * Theta2;
-Theta1_grad(:,1) -= (lambda/m) * Theta1(:,1);
-Theta2_grad(:,1) -= (lambda/m) * Theta2(:,1);
+Theta1_grad = Theta1_grad + (lambda/m) * Theta1;
+Theta2_grad = Theta2_grad + (lambda/m) * Theta2;
+Theta1_grad(:,1) = Theta1_grad(:,1) - (lambda/m) * Theta1(:,1);
+Theta2_grad(:,1) = Theta2_grad(:,1) - (lambda/m) * Theta2(:,1);
 
 
 
