@@ -30,15 +30,15 @@ num_data = zeros(K, 1);
 
 for i=1:m
     k = idx(i);
-    centroids(k,:) += X(i,:);
-    num_data(k) += 1;
-endfor
+    centroids(k,:) = centroids(k,:) + X(i,:);
+    num_data(k) = num_data(k) + 1;
+end
 
 for k=1:K
-    if num_data(k) != 0
-        centroids(k,:) /= num_data(k);
-    endif
-endfor
+    if num_data(k) ~= 0
+        centroids(k,:) = centroids(k,:) / num_data(k);
+    end
+end
 
 
 

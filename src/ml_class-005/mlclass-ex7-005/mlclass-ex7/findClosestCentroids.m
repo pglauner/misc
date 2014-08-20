@@ -29,9 +29,9 @@ for i = 1:m
         if curr_distance < best
             best = curr_distance;
             idx(i) = k;
-        endif
-    endfor
-endfor
+        end
+    end
+end
 
 
 
