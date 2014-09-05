@@ -32,11 +32,11 @@ sister(X, Y) :-
   female(X),
   different(X, Y).
 
-happy(X) :- parent(X, _Y).
+happy(X) :- parent(X, _).
 
 hastwochildren(X) :-
   parent(X, Y),
-  sister(_Z, Y).
+  sister(_, Y).
 
 
 grandchild(X, Y) :- grandparent(Y, X).
