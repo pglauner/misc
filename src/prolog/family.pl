@@ -1,5 +1,4 @@
-different(X,X) :- !,fail.
-different(_,_).
+different(X, Y) :- not(X = Y).
 
 parent(pam, bob).
 parent(tom, bob).
