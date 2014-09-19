@@ -1,5 +1,5 @@
 my_member(X, [X|_]).  
-my_member(X, [_|T]) :- member(X, T).
+my_member(X, [_|T]) :- my_member(X, T).
 
 my_conc([], L, L).
 my_conc([X|L1], L2, [X|L3]) :- my_conc(L1, L2, L3).
@@ -52,3 +52,20 @@ my_means(9, nine).
 
 my_translate([], []).
 my_translate([H|T], [H1|T1]) :- my_means(H, H1), my_translate(T, T1).
+
+my_length([], 0).
+my_length([_|Tail], N) :- my_length(Tail, N1), N is 1 + N1.
+
+my_length1([], 0).
+my_length1([_|Tail], N) :- N = 1 + N1, my_length1(Tail, N1).
+
+my_max(X, Y, Max) :- X >= Y, Max = X; X < Y, Max = Y.
+
+my_maxlist([X], X).
+my_maxlist([X, Y|T], Max) :- my_maxlist([Y|T], MaxRest), my_max(X, MaxRest, Max).
+
+my_sum([], 0).
+my_sum([H|T], Sum) :- my_sum(T, Sum1), Sum is H + Sum1.
+
+my_ordered([_]).
+my_ordered([X, Y|T]) :- X =< Y, my_ordered([Y|T]).
