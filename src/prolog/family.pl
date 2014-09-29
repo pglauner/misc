@@ -13,6 +13,9 @@ child(X) :- family(_, _, Children), my_member(X, Children).
 my_del(X, [X|Tail], Tail).
 my_del(X, [Y|Tail], [Y|Tail1]) :- my_del(X, Tail, Tail1).
 
+nth_member(1, [H|_], H).
+nth_member(N, [_|T], X) :- N1 is N - 1, nth_member(N1, T, X).
+
 exists(Person) :- husband(Person); wife(Person); child(Person).
 
 dateofbirth(person(_, _, Date, _), Date).
@@ -37,3 +40,13 @@ twins1(Child1, Child2) :-
  member(Child2, OtherChildren),
  dateofbirth(Child1, Date),
  dateofbirth(Child2, Date).
+
+husband(family(Husband, _, _), Husband).
+wife(family(_, Wife, _), Wife).
+children(family(_, _, ChildList), ChildList).
+firstchild(Family, First) :- children(Family, [First|_]).
+secondchild(Family, Second) :- children(Family, [_, Second|_]).
+nthchild(N, Family, Child) :- children(Family, ChildList), nth_member(N, ChildList, Child).
+firstname(person(Name, _, _), Name).
+surname(person(_, Surname, _), Surname).
+born(person(_, _, Date, _), Date).
