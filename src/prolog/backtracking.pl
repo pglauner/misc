@@ -24,3 +24,10 @@ mymember1(X, [X|L]) :- mymember(X, L).
 
 myadd(X, L, L) :- mymember1(X, L), !.
 myadd(X, L, [X|L]).
+
+different(X, Y) :-
+  X = Y, !, fail;
+  true.
+
+different1(X, X) :- !, fail.
+different1(X, Y).

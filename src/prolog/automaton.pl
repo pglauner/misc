@@ -6,7 +6,6 @@ trans(s1, b, s1).
 trans(s2, b, s3).
 trans(s3, b, s4).
 
-silent(s1, s3).
 silent(s2, s4).
 silent(s3, s1).
 
