@@ -24,6 +24,8 @@ move(state(P1, onfloor, B, H),
 % canget(State): monkey can get banana in State
 canget(state( _, _, _, has)).
 
+canget(state(_ , ontop, _, _)) :- canget(state(_, onfloor, _, _)).
+
 canget(State1) :-
       move(State1, _, State2),
       canget(State2).
